@@ -1,25 +1,24 @@
-const Card = () => {
-  const data = [
-    {
-      name: "Mahiya Ve",
-      description: "The name of the card that will be displayed",
-    },
-    {
-      name: "joon",
-      description: "The name of the card that will be displayed",
-    },
-  ];
+import React from "react";
+
+const Card = ({ data, handleClick, index }) => {
+  const { image, artist, added, name } = data;
   return (
-    <div className="w-full h-screen bg-zinc-300 flex flex-col gap-4 justify-center items-center">
-      {data.map((item, index) => (
-        <div key={index} className="w-90 px-3 py-2 bg-zinc-100 rounded-md">
-          <h3 className="font-semibold text-xl">{item.name}</h3>
-          <p className="text-sm mt-2">{item.description}</p>
-          <button onClick={()=>alert("hey")} className="px-2 py-1 bg-blue-400 text-xs font-semibold text-zinc-100 rounded mt-3">
-            Download Now
-          </button>
-        </div>
-      ))}
+    <div className="w-60 bg-zinc-100 p-4 rounded-md flex gap-4 pb-8 relative mt-10">
+      <div className="w-20 h-20 bg-orange-600 rounded-md overflow-hidden">
+        <img className="w-full h-full object-cover" src={image} alt="" />
+      </div>
+      <div className="">
+        <h3 className="text-xl leading-none font-semibold">{name}</h3>
+        <h6 className="text-sm">{artist}</h6>
+      </div>
+      <button
+        onClick={() => handleClick(index)}
+        className={`px-4 py-3 whitespace-nowrap ${
+          added === false ? "bg-orange-600" : "bg-teal-500"
+        } absolute bottom-0 left-1/2 -translate-x-[50%] translate-y-[50%] text-white text-xs rounded-full`}
+      >
+        {added === false ? "Add To Favourites" : "Added"}
+      </button>
     </div>
   );
 };
